@@ -89,15 +89,12 @@ def apriori(tracts, U, sigma):
                             candidates.append(p_level[i].union(e))
                 j=j+1
         p_level=[]
-        #Calculating frequency
+        #Calculating support
         for i in candidates:
-            count=0
-            for j in range(len(tracts)):
-                if i.issubset(tracts[j]):
-                    count=count+1
-            if (count/len(tracts))>sigma:
+            supp_i = support(tracts, U, i)
+            if supp_i>sigma:
                 final.append(i)
-                freq.append(round(count/len(tracts),3))
+                freq.append(round(supp_i,3))
                 p_level.append(i)
     return(final, freq)
 
